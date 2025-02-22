@@ -76,6 +76,8 @@ The most important features influencing churn prediction were:
 2. **Customer Service Calls** (frequent complaints indicate dissatisfaction)
 3. **International Plan** (customers with this plan tend to churn more)
 
+![Feature Importance](images/feature_importance.png)
+
 ## Conclusions / Next Steps
 - **Hyperparameter tuning**: Further tuning of tree-based models (e.g., increasing n_estimators) could improve performance.
 - **Additional models**: Testing boosting models like **XGBoost** or **LightGBM** for better churn prediction.
