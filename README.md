@@ -1,6 +1,6 @@
 # SyriaTel Customer Churn Prediction
 
-This project aims to predict customer churn for SyriaTel, a telecommunications company, using machine learning classification models. The dataset contains customer data and service usage information. The goal is to identify at-risk customers and provide insights for retention strategies.
+This project aims to classify whether a customer is likely to churn using data from SyriaTel. By leveraging machine learning techniques, we help the company implement proactive retention strategies and reduce revenue loss.
 
 ## Tech Stack
 - Python
@@ -8,81 +8,75 @@ This project aims to predict customer churn for SyriaTel, a telecommunications c
 - Matplotlib
 - Seaborn
 - Scikit-Learn
-- Imbalanced-learn (SMOTE)
 
-## Exploratory Data Analysis (EDA)
+## Business Context
+Customer churn leads to revenue loss and higher customer acquisition costs. Understanding churn patterns allows SyriaTel to implement data-driven retention strategies, improving long-term customer value.
 
-For modeling, the SyriaTel customer dataset was cleaned, analyzed, and preprocessed. Missing values were imputed, and categorical data was one-hot encoded. Outliers were handled using the Interquartile Range (IQR) method.
+## Business Problem
+SyriaTel faces significant customer churn. Our goal is to build a classifier that predicts whether a customer will leave soon, allowing SyriaTel to take proactive measures to retain them.
 
-The dataset showed an **imbalance in churn distribution**, with far more non-churners than churners. To address this, **SMOTE (Synthetic Minority Over-sampling Technique)** was used to balance the training dataset.
+## Data Understanding
+The dataset includes customer demographic details, service usage patterns, and historical churn labels. By analyzing this data, we can identify patterns that signal potential churn.
 
-### Correlation Heatmap
-![Correlation Heatmap](images/correlation_heatmap.png)
+### Churn Rate Distribution
+![Churn Rate Distribution](images/churn_distribution.png)
+
+
+
 
 ## Feature Engineering
+The following features were included in the final model:
+- **Included:**
+  - Customer demographics (age, tenure, etc.)
+  - Service usage metrics
+  - Call frequency and international plan status
+  - Historical churn labels
+- **Engineered:**
+  - Interaction variables between service usage and tenure
+  - Categorical encoding for non-numeric variables
 
-The following features were selected for modeling:
-- **Numerical Features**: Account length, total day minutes, total evening minutes, total night minutes, customer service calls, etc.
-- **Categorical Features**: International plan, voice mail plan.
-- **Engineered Features**: One-hot encoding for categorical variables and standardization for numerical variables.
+## Modeling Approach
+We tested multiple models to determine the best classifier for predicting customer churn:
+- **Logistic Regression:** Simple and interpretable baseline.
+- **Decision Trees:** Helps identify key churn factors.
+- **Random Forest:** More advanced model with better accuracy.
+- **SMOTE:** Used to address class imbalance.
+- **Hyperparameter Tuning:** Optimized model performance.
 
-## Modeling
+### Model Performance Visualization
+![Model Performance](images/model_performance.png)
 
-Three different machine learning models were implemented and evaluated:
+## Model Performance
+The Random Forest model performed the best, achieving an accuracy of approximately **66%**. Key performance metrics included:
+- **Accuracy:** Measures overall correctness of predictions.
+- **Precision:** Focuses on correctly identifying real churners.
+- **Recall:** Ensures maximum identification of churners.
+- **F1-score:** Balances precision and recall.
 
-### 1. Logistic Regression
-**Best Parameters:** `C = 1`
-- **Accuracy:** 73.3%
-- **Precision & Recall:**
-  - Non-churners (Class 0): **Precision = 94%, Recall = 74%**
-  - Churners (Class 1): **Precision = 32%, Recall = 71%**
-- **Insights:**
-  - Logistic Regression struggles with imbalanced data, leading to **low precision for churners (32%)**.
-  - However, recall for churners is **high (71%)**, meaning the model correctly identifies most churners.
-  - Not ideal for precise churn prediction due to high false positive rates.
-
-### 2. Decision Tree
-**Best Parameters:** `max_depth = 6, min_samples_split = 2`
-- **Accuracy:** 88.9%
-- **Precision & Recall:**
-  - Non-churners: **Precision = 95%, Recall = 92%**
-  - Churners: **Precision = 60%, Recall = 73%**
-- **Insights:**
-  - Decision trees capture complex relationships better than logistic regression.
-  - Recall remains high for churners (**73%**), but precision improves to **60%**.
-  - The model is prone to overfitting without proper pruning.
-
-### 3. Random Forest (Best Performing Model)
-**Best Parameters:** `max_depth = 20, min_samples_split = 2, n_estimators = 50`
-- **Accuracy:** 91.5%
-- **Precision & Recall:**
-  - Non-churners: **Precision = 95%, Recall = 95%**
-  - Churners: **Precision = 70%, Recall = 72%**
-- **Insights:**
-  - **Random Forest performed the best**, with the highest accuracy and a good balance between precision and recall.
-  - It reduces overfitting by averaging multiple decision trees.
-  - Precision for churners improves to **70%**, reducing false positives compared to the decision tree.
-  
-## Visualization
-- **Decision Tree Visualization**: The decision tree model was visualized to illustrate key decision splits.
-- **Feature Importance Graph**: Random Forest feature importance was plotted to highlight the most significant variables.
-- **Classification Report & Confusion Matrix**:
-  ![Random Forest Classification Report](images/random_forest_classification_report.png)
-  ![Random Forest Confusion Matrix](images/random_forest_confusion_matrix.png)
-
-## Feature Importance
-The most important features influencing churn prediction were:
-1. **Total Day Minutes** (higher usage correlates with churn)
-2. **Customer Service Calls** (frequent complaints indicate dissatisfaction)
-3. **International Plan** (customers with this plan tend to churn more)
-
+### Feature Importance
 ![Feature Importance](images/feature_importance.png)
 
-## Conclusions / Next Steps
-- **Hyperparameter tuning**: Further tuning of tree-based models (e.g., increasing n_estimators) could improve performance.
-- **Additional models**: Testing boosting models like **XGBoost** or **LightGBM** for better churn prediction.
-- **Customer segmentation**: Cluster customers into different risk groups based on their churn probability.
-- **Business recommendations**: Develop proactive customer retention strategies based on high-risk features (e.g., offering better customer service, targeted promotions for high-usage customers).
+## Key Findings
+- **Best Model:** Random Forest
+- **Top Churn Indicators:**
+  - High service usage
+  - International plan subscription
+  - Frequent customer support calls
 
----
-This project provides valuable insights for SyriaTel to reduce churn and improve customer satisfaction using machine learning techniques.
+## Recommendations
+1. Implement personalized retention offers for high-risk customers.
+2. Improve customer experience with proactive support and incentives.
+3. Use data-driven insights to refine loyalty programs.
+4. Continuously monitor and refine the churn prediction model.
+
+## Next Steps
+1. Deploy the best-performing model in production.
+2. Continuously update the model with new data.
+3. Conduct A/B testing to evaluate the impact of retention strategies.
+
+## Contact
+For any questions or discussions, feel free to connect:
+- **LinkedIn:** Betsy Gitije
+- **GitHub:** BetsyGitije
+
+
