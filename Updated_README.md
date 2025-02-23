@@ -21,6 +21,9 @@ The dataset includes customer demographic details, service usage patterns, and h
 ### Churn Rate Distribution
 ![Churn Rate Distribution](images/churn_distribution.png)
 
+
+
+
 ## Feature Engineering
 The following features were included in the final model:
 - **Included:**
